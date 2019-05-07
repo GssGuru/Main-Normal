@@ -1,4 +1,4 @@
-package newspaper.gamestudiostandart.newspaper.aplication;
+package guru.gss.mainnormal.aplication;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -8,8 +8,8 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.AppCompatDelegate;
 
-import newspaper.gamestudiostandart.newspaper.R;
-import newspaper.gamestudiostandart.newspaper.aplication.main.fragment.FragmentNews;
+import guru.gss.mainnormal.R;
+import guru.gss.mainnormal.aplication.main.fragment.FragmentNews;
 
 @SuppressLint("Registered")
 public class BaseActivity extends AppCompatActivity {

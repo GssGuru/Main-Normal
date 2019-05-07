@@ -1,4 +1,4 @@
-package newspaper.gamestudiostandart.newspaper;
+package guru.gss.mainnormal;
 
 import android.annotation.SuppressLint;
 import android.app.Application;

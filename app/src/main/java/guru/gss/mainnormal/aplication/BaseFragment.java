@@ -1,4 +1,4 @@
-package newspaper.gamestudiostandart.newspaper.aplication;
+package guru.gss.mainnormal.aplication;
 
 import android.view.View;
 import android.view.animation.AlphaAnimation;
