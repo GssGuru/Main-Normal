@@ -14,10 +14,10 @@ import java.util.Objects;
 
 import guru.gss.mainnormal.R;
 
-public class DialigError extends DialogFragment {
+public class ErrorDialig extends DialogFragment {
 
-    public static DialigError newInstance() {
-        return new DialigError();
+    public static ErrorDialig newInstance() {
+        return new ErrorDialig();
     }
 
     @Override

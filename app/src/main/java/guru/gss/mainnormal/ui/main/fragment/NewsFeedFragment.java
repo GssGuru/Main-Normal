@@ -151,8 +151,8 @@ public class NewsFeedFragment extends BaseFragment implements NewsFeedFragmentVi
     @Override
     public void setError() {
         hideRefreshView(refresh_view);
-        DialigError mDialigError = DialigError.newInstance();
-        mDialigError.registerInterfaceCallback(new DialigError.InterfaceCallback() {
+        ErrorDialig mErrorDialig = ErrorDialig.newInstance();
+        mErrorDialig.registerInterfaceCallback(new ErrorDialig.InterfaceCallback() {
             @Override
             public void refresh() {
                 presenter.getNewsList(author);
@@ -163,7 +163,7 @@ public class NewsFeedFragment extends BaseFragment implements NewsFeedFragmentVi
                 Objects.requireNonNull(getActivity()).finish();
             }
         });
-        mDialigError.show(Objects.requireNonNull(getActivity()).getSupportFragmentManager(), mDialigError.getClass().getSimpleName());
+        mErrorDialig.show(Objects.requireNonNull(getActivity()).getSupportFragmentManager(), mErrorDialig.getClass().getSimpleName());
     }
 
     public void hideRefreshView(SwipeRefreshLayout refresh_view) {
