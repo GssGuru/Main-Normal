@@ -1,4 +1,4 @@
-package guru.gss.mainnormal.aplication.main.fragment;
+package guru.gss.mainnormal.ui.main.fragment;
 
 import android.content.Context;
 import android.content.Intent;
@@ -26,26 +26,26 @@ import guru.gss.mainnormal.R;
 import guru.gss.mainnormal.utils.model.NewsModel;
 
 /*Simple adapter for News*/
-public class AdapterNews extends RecyclerView.Adapter<AdapterNews.ViewHolder> {
+public class NewsFeedAdapter extends RecyclerView.Adapter<NewsFeedAdapter.ViewHolder> {
 
     private Context context;
     private ArrayList<NewsModel> list;
 
-    AdapterNews(Context context) {
+    NewsFeedAdapter(Context context) {
         this.context = context;
         this.list = new ArrayList<>();
     }
 
     @NonNull
     @Override
-    public AdapterNews.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public NewsFeedAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.i_news, parent, false);
-        return new AdapterNews.ViewHolder(v);
+        return new NewsFeedAdapter.ViewHolder(v);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final AdapterNews.ViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull final NewsFeedAdapter.ViewHolder holder, final int position) {
 
         final NewsModel newsModel = list.get(position);
 
@@ -64,7 +64,7 @@ public class AdapterNews extends RecyclerView.Adapter<AdapterNews.ViewHolder> {
 
             Glide.with(context)
                     .load(newsModel.getUrlToImage())
-                    .skipMemoryCache( true )
+                    .skipMemoryCache(true)
                     .listener(new RequestListener<String, GlideDrawable>() {
                         @Override
                         public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
@@ -93,7 +93,7 @@ public class AdapterNews extends RecyclerView.Adapter<AdapterNews.ViewHolder> {
         holder.iv_share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View view) {
-                if(!TextUtils.isEmpty(newsModel.getUrl())) {
+                if (!TextUtils.isEmpty(newsModel.getUrl())) {
                     Intent sendIntent = new Intent();
                     sendIntent.setAction(Intent.ACTION_SEND);
                     sendIntent.putExtra(Intent.EXTRA_TEXT, newsModel.getUrl());

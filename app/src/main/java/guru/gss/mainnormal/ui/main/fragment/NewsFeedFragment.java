@@ -1,8 +1,9 @@
-package guru.gss.mainnormal.aplication.main.fragment;
+package guru.gss.mainnormal.ui.main.fragment;
 
 import android.content.Context;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -14,28 +15,17 @@ import android.view.animation.LayoutAnimationController;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 
-import com.arellomobile.mvp.presenter.InjectPresenter;
-import com.arellomobile.mvp.presenter.ProvidePresenter;
-import com.baoyz.widget.PullRefreshLayout;
-
 import java.util.ArrayList;
 import java.util.Objects;
 
 import guru.gss.mainnormal.R;
-import guru.gss.mainnormal.aplication.BaseFragment;
-import guru.gss.mainnormal.model.interactors.news.NewsInteractor;
-import guru.gss.mainnormal.model.repository.network.NetworkRepositoryImpl;
+import guru.gss.mainnormal.ui.BaseFragment;
 import guru.gss.mainnormal.utils.model.NewsModel;
 
-public class FragmentNews extends BaseFragment implements ViewFragment {
+public class NewsFeedFragment extends BaseFragment implements NewsFeedFragmentView {
 
-    @InjectPresenter
-    PresenterFragment presenter;
 
-    @ProvidePresenter
-    PresenterFragment providePresenter() {
-        return new PresenterFragment(new NewsInteractor(new NetworkRepositoryImpl()));
-    }
+    NewsFeedFragmentPresenter presenter;
 
     private static final String NEWS_AUTHOR = "news_author";
     private static final String NEWS_TITLE = "news_title";
@@ -43,17 +33,17 @@ public class FragmentNews extends BaseFragment implements ViewFragment {
 
     private OnFragmentInteractionListener mListener;
 
-    private AdapterNews adapterNews;
+    private NewsFeedAdapter newsFeedAdapter;
     private ProgressBar progress;
     private RecyclerView recyclerView;
     private LinearLayout fl_items_not_found;
-    private PullRefreshLayout refresh_view;
+    private SwipeRefreshLayout refresh_view;
 
-    public FragmentNews() {
+    public NewsFeedFragment() {
     }
 
-    public static FragmentNews newInstance(String author, String title) {
-        FragmentNews fragment = new FragmentNews();
+    public static NewsFeedFragment newInstance(String author, String title) {
+        NewsFeedFragment fragment = new NewsFeedFragment();
         Bundle args = new Bundle();
         args.putString(NEWS_AUTHOR, author);
         args.putString(NEWS_TITLE, title);
@@ -80,18 +70,19 @@ public class FragmentNews extends BaseFragment implements ViewFragment {
         recyclerView = v.findViewById(R.id.recyclerView);
         fl_items_not_found = v.findViewById(R.id.fl_items_not_found);
 
-        refresh_view.setOnRefreshListener(new PullRefreshLayout.OnRefreshListener() {
+        refresh_view.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 presenter.getNewsList(author);
             }
         });
 
-        adapterNews = new AdapterNews(getContext());
+
+        newsFeedAdapter = new NewsFeedAdapter(getContext());
         LayoutAnimationController animation = AnimationUtils.loadLayoutAnimation(getContext(), R.anim.layout_news_animation);
         recyclerView.setLayoutAnimation(animation);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.setAdapter(adapterNews);
+        recyclerView.setAdapter(newsFeedAdapter);
 
         progress.setVisibility(View.VISIBLE);
         recyclerView.setVisibility(View.GONE);
@@ -133,7 +124,7 @@ public class FragmentNews extends BaseFragment implements ViewFragment {
     public void onResume() {
         super.onResume();
         if (mUserVisibleHint) {
-            if (adapterNews.getItemCount() == 0) {
+            if (newsFeedAdapter.getItemCount() == 0) {
                 presenter.getNewsList(author);
             }
         }
@@ -146,7 +137,7 @@ public class FragmentNews extends BaseFragment implements ViewFragment {
                 showContentAnimation(fl_items_not_found, progress);
             }
         } else {
-            adapterNews.addAll(list);
+            newsFeedAdapter.addAll(list);
             showContentAnimation(recyclerView, progress);
         }
         hideRefreshView(refresh_view);
@@ -175,7 +166,7 @@ public class FragmentNews extends BaseFragment implements ViewFragment {
         mDialigError.show(Objects.requireNonNull(getActivity()).getSupportFragmentManager(), mDialigError.getClass().getSimpleName());
     }
 
-    public void hideRefreshView(PullRefreshLayout refresh_view) {
+    public void hideRefreshView(SwipeRefreshLayout refresh_view) {
         if (refresh_view.isShown()) {
             refresh_view.setRefreshing(false);
         }

@@ -1,12 +1,11 @@
-package guru.gss.mainnormal.aplication;
+package guru.gss.mainnormal.ui;
 
+import android.support.v4.app.Fragment;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 
-import com.arellomobile.mvp.MvpAppCompatFragment;
-
-public class BaseFragment extends MvpAppCompatFragment {
+public class BaseFragment extends Fragment {
 
     public void showContentAnimation(final View newView, final View oldView) {
         final AlphaAnimation newViewAnimation = new AlphaAnimation(0.0f, 1.0f);
@@ -16,7 +15,8 @@ public class BaseFragment extends MvpAppCompatFragment {
         oldView.startAnimation(oldViewAnimation);
         oldViewAnimation.setAnimationListener(new Animation.AnimationListener() {
             @Override
-            public void onAnimationStart(Animation animation) {}
+            public void onAnimationStart(Animation animation) {
+            }
 
             @Override
             public void onAnimationEnd(Animation animation) {
@@ -26,7 +26,8 @@ public class BaseFragment extends MvpAppCompatFragment {
             }
 
             @Override
-            public void onAnimationRepeat(Animation animation) {}
+            public void onAnimationRepeat(Animation animation) {
+            }
         });
     }
 

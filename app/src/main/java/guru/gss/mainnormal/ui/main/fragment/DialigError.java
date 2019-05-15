@@ -1,4 +1,4 @@
-package guru.gss.mainnormal.aplication.main.fragment;
+package guru.gss.mainnormal.ui.main.fragment;
 
 import android.content.DialogInterface;
 import android.os.Bundle;

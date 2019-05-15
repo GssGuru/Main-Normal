@@ -1,4 +1,4 @@
-package guru.gss.mainnormal.aplication.main;
+package guru.gss.mainnormal.ui.main;
 
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -7,10 +7,10 @@ import android.support.v4.widget.DrawerLayout;
 import android.view.MenuItem;
 
 import guru.gss.mainnormal.R;
-import guru.gss.mainnormal.aplication.BaseActivity;
-import guru.gss.mainnormal.aplication.main.fragment.FragmentNews;
+import guru.gss.mainnormal.ui.BaseActivity;
+import guru.gss.mainnormal.ui.main.fragment.NewsFeedFragment;
 
-public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener, FragmentNews.OnFragmentInteractionListener {
+public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener, NewsFeedFragment.OnFragmentInteractionListener {
 
     private int mIdSelectedItem;
     private DrawerLayout mDrawer;

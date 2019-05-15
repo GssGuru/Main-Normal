@@ -1,7 +1,4 @@
-package guru.gss.mainnormal.aplication.main.fragment;
-
-import com.arellomobile.mvp.InjectViewState;
-import com.arellomobile.mvp.MvpPresenter;
+package guru.gss.mainnormal.ui.main.fragment;
 
 import java.util.ArrayList;
 
@@ -9,13 +6,12 @@ import guru.gss.mainnormal.model.interactors.news.NewsInteractor;
 import guru.gss.mainnormal.model.interactors.news.interfaces.OnFinishedListener;
 import guru.gss.mainnormal.utils.model.NewsModel;
 
-@InjectViewState
-public class PresenterFragment extends MvpPresenter<ViewFragment> {
+public class NewsFeedFragmentPresenter extends MvpPresenter<NewsFeedFragmentView> {
 
     private NewsInteractor newsInteractor;
     private ArrayList<NewsModel> list;
 
-    PresenterFragment(NewsInteractor newsInteractor) {
+    NewsFeedFragmentPresenter(NewsInteractor newsInteractor) {
         this.newsInteractor = newsInteractor;
     }
 
